@@ -42,6 +42,7 @@ function AppContent() {
   }, [state.toast, dispatch]);
 
   const globalBusy = state.busyState === "uploading" || state.busyState === "exporting";
+  const uploadDisabled = globalBusy || Boolean(state.imageDataURL);
 
   const showEditor = () => {
     dispatch({ type: "SHOW_EDITOR" });
@@ -58,7 +59,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen pb-12 text-slate-100">
-      <Navbar onUploadClick={upload.openFileDialog} disabled={globalBusy} />
+      <Navbar onUploadClick={upload.openFileDialog} disabled={uploadDisabled} />
 
       <Hero
         upload={upload}
